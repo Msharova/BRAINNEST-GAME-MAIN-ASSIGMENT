@@ -3,6 +3,7 @@ const winGame = `You win!`;
 const loseGame = `You lose!`;
 const tieGame = `It's a tie!`;
 const noGame = `You don't want to play?`;
+const tittle = document.querySelector('#tittle-1');
 
 let playerWin = 0;
 let compWin = 0;
@@ -95,10 +96,12 @@ const scoreDisplay = document.querySelector("#score");
 scoreDisplay.innerHTML = `Player: ${playerWin} | Computer: ${compWin}`;
 
 if (playerWin === 5) {
-resultDisplay.innerHTML = "You win the game! Congratulations!";
+resultDisplay.innerHTML = "Winner, Winner, Winner! Congratulations!";
+tittle.innerHTML = `Congrats, You won the game! &#128512;`;
 deactivateButtons();
 } else if (compWin === 5) {
 resultDisplay.innerHTML = "Computer wins the game. Better luck next time.";
+tittle.innerHTML = `Ohh Sorry, You loose &#128531;`;
 deactivateButtons();
 };
 };
