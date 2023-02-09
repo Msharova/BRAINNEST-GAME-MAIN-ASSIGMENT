@@ -6,6 +6,8 @@ const tieGame = `It's a tie!`;
 const noGame = `You don't want to play?`;
 const tittle = document.querySelector('#tittle-1');
 
+//some new comment from Maria
+//second try
 // initialize the scores to 0 for the player and the computer
 let playerWin = 0;
 let compWin = 0;
