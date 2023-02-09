@@ -1,13 +1,16 @@
-/* GLOBALS */
+/* GLOBALS */ 
+// initialize the variables that represent the win/lose/tie messages and the tittle of the game, the tittle of the game, and the scores for the player and computer
 const winGame = `You win!`;
 const loseGame = `You lose!`;
 const tieGame = `It's a tie!`;
 const noGame = `You don't want to play?`;
 const tittle = document.querySelector('#tittle-1');
 
+// initialize the scores to 0 for the player and the computer
 let playerWin = 0;
 let compWin = 0;
 
+// initialize the styles for the buttons that will be created
 const buttonStyle = {
   backgroundColor: "#3498DB",
   color: "white",
@@ -18,9 +21,12 @@ const buttonStyle = {
 };
 
 /* ADD BUTTONS IN DIVS*/
+
+// create a div for the buttons
 const buttons = document.createElement('div');
 buttons.classList.add('buttons');
 
+// create the rock, paper and scissors buttons and add them to the buttons div, besides adding them the styles
 const rockButton = document.createElement('button');
 rockButton.textContent = 'Rock';
 rockButton.value = 'rock';
@@ -42,20 +48,27 @@ scissorsButton.id = 'scissors';
 Object.assign(scissorsButton.style, buttonStyle);
 buttons.appendChild(scissorsButton);
 
+// Add the buttons div to the body
 document.body.appendChild(buttons);
 
 
 /* COMPUTER'S SELECTION */
+
+// function that returns a random selection of Rock, Paper or Scissors
 function computerPlay() {
 const gameWords = [`Rock`, 'Paper', 'Scissors'];
 return gameWords[Math.floor(Math.random() * gameWords.length)];
 };
 
 /* COMPARE SELECTIONS */
+
+// function that receives the player's and computer's selections and returns the result
 function playRound(playerSelection, computerSelection) {
 playerSelection = playerSelection.toLowerCase();
 computerSelection = computerSelection.toLowerCase();
 
+// compare the selections and return the result with variables declared above with Fun texts
+// the function uses a conditional statement to compare the selections and return the result
 if (playerSelection === computerSelection) {
     return tieGame;
 } else if (
@@ -69,6 +82,8 @@ if (playerSelection === computerSelection) {
 }};
 
 /* BUTTONS CLICKS */
+
+// function that handles the player selection and the result of the game
 function handleSelection(e) {
 const playerSelection = e.target.value;
 const computerSelection = computerPlay();
@@ -95,6 +110,7 @@ compWin++;
 const scoreDisplay = document.querySelector("#score");
 scoreDisplay.innerHTML = `Player: ${playerWin} | Computer: ${compWin}`;
 
+// this function updates the result and score displays, and deactivates the buttons with the funtcion deactivateButtons() when either the player or the computer has won 5 rounds
 if (playerWin === 5) {
 resultDisplay.innerHTML = "Winner, Winner, Winner! Congratulations!";
 tittle.innerHTML = `Congrats, You won the game! &#128512;`;
@@ -118,6 +134,7 @@ function deactivateButtons() {
   scissorsButton.style.cursor = "default";
 }
 
+// Add event listeners to the rock, paper and scissors buttons
 rockButton.addEventListener("click", handleSelection);
 paperButton.addEventListener("click", handleSelection);
 scissorsButton.addEventListener("click", handleSelection);
