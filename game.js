@@ -1,15 +1,10 @@
-/* GLOBALS */
-// Variables with the win/lose/tie messages, the tittle of the game and the scores for the player and computr
 const winGame = `You win!`;
 const loseGame = `You lose!`;
 const tieGame = `It's a tie!`;
 const tittle = document.querySelector("#tittle-1");
-
-// initialize the scores to 0 for the player and the computer
 let playerWin = 0;
 let compWin = 0;
 
-// initialize the styles for the game as objets
 const buttonStyle = {
   backgroundColor: "#3498DB",
   color: "white",
@@ -50,13 +45,9 @@ const restartButtonStyles = {
   borderRadius: "10px",
 };
 
-/* ADD BUTTONS IN DIVS*/
-
-// create a div for the buttons
 const buttons = document.createElement("div");
 buttons.classList.add("buttons");
 
-// create the rock, paper and scissors buttons and add them to the buttons div, besides adding them the styles
 const rockButton = document.createElement("button");
 rockButton.textContent = "Rock";
 rockButton.value = "rock";
@@ -78,31 +69,21 @@ scissorsButton.id = "scissors";
 Object.assign(scissorsButton.style, buttonStyle);
 buttons.appendChild(scissorsButton);
 
-// Add the buttons div to the body
 document.body.appendChild(buttons);
 
-//Add some styles to the game
 Object.assign(document.body.style, bodyStyle);
 Object.assign(tittle.style, tittleStyle);
 Object.assign(buttons.style, buttonsStyle);
 
-/* COMPUTER'S SELECTION */
-
-// function that returns a random selection of Rock, Paper or Scissors
 function computerPlay() {
   const gameWords = [`Rock`, "Paper", "Scissors"];
   return gameWords[Math.floor(Math.random() * gameWords.length)];
 }
 
-/* COMPARE SELECTIONS */
-
-// function that receives the player's and computer's selections and returns the result
 function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   computerSelection = computerSelection.toLowerCase();
 
-  // compare the selections and return the result with variables declared above with Fun texts
-  // the function uses a conditional statement to compare the selections and return the result
   if (playerSelection === computerSelection) {
     return tieGame;
   } else if (
@@ -114,11 +95,8 @@ function playRound(playerSelection, computerSelection) {
   } else {
     return loseGame;
   }
-}
+};
 
-/* BUTTONS CLICKS */
-
-// function that handles the player selection and the result of the game
 function handleSelection(e) {
   const playerSelection = e.target.value;
   const computerSelection = computerPlay();
@@ -132,9 +110,7 @@ function handleSelection(e) {
   } else if (result === tieGame) {
     resultDisplay.style.color = "#F1C40F";
   }
-  resultDisplay.innerHTML = `Round:
-
-${result} <br> Player chose ${playerSelection}. Computer chose ${computerSelection}.`;
+  resultDisplay.innerHTML = `Round: ${result} <br> Player chose ${playerSelection}. Computer chose ${computerSelection}.`;
 
   if (result === winGame) {
     playerWin++;
@@ -145,7 +121,6 @@ ${result} <br> Player chose ${playerSelection}. Computer chose ${computerSelecti
   const scoreDisplay = document.querySelector("#score");
   scoreDisplay.innerHTML = `Player: ${playerWin} | Computer: ${compWin}`;
 
-  // this function updates the result and score displays, and deactivates the buttons with the funtcion deactivateButtons() when either the player or the computer has won 5 rounds
   if (playerWin === 5) {
     resultDisplay.innerHTML = "Winner, Winner, Winner! Congratulations!";
     tittle.innerHTML = `Congrats, You won the game! &#128512;`;
@@ -184,7 +159,6 @@ function restartGame() {
     playerWin = 0;
     compWin = 0;
     resultDisplay.innerHTML = "";
-
     rockButton.addEventListener("click", handleSelection);
     rockButton.style.backgroundColor = "#4CAF50";
     rockButton.style.cursor = "pointer";
@@ -194,7 +168,6 @@ function restartGame() {
     scissorsButton.addEventListener("click", handleSelection);
     scissorsButton.style.backgroundColor = "#f44336";
     scissorsButton.style.cursor = "pointer";
-
     tittle.textContent = "Good luck this time, You can make it! :D";
     resultDisplay.innerHTML = "";
     scoreDisplay.innerHTML = "";
@@ -202,13 +175,10 @@ function restartGame() {
     restartButton.remove();
   });
 }
-
-// Add event listeners to the rock, paper and scissors buttons
 rockButton.addEventListener("click", handleSelection);
 paperButton.addEventListener("click", handleSelection);
 scissorsButton.addEventListener("click", handleSelection);
 
-/* RESULTS DISPLAY */
 const scoreDisplay = document.createElement("p");
 scoreDisplay.id = "score";
 scoreDisplay.innerHTML = "Player: 0 | Computer: 0";
@@ -219,7 +189,6 @@ resultDisplay.id = "result";
 resultDisplay.innerHTML = "Make your move!";
 document.body.appendChild(resultDisplay);
 
-/* CAPITALIZE FIRST LETTER */
 function capitalizeFirstLetter(wordSelected) {
   return wordSelected.charAt(0).toUpperCase() + wordSelected.slice(1);
 }
